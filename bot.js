@@ -31,13 +31,13 @@ var bot_options = {
 
 // Use a mongo database if specified, otherwise store in a JSON file local to the app.
 // Mongo is automatically configured when deploying to Heroku
-if (process.env.MONGO_URI) {
-  // create a custom db access method
-  var db = require(__dirname + '/components/database.js')({});
-  bot_options.storage = db;
-} else {
-    bot_options.json_file_store = __dirname + '/.data/db/'; // store user data in a simple JSON format
-}
+// if (process.env.MONGO_URI) {
+//   // create a custom db access method
+//   var db = require(__dirname + '/components/database.js')({});
+//   bot_options.storage = db;
+// } else {
+//     bot_options.json_file_store = __dirname + '/.data/db/'; // store user data in a simple JSON format
+// }
 
 // Create the Botkit controller, which controls all instances of the bot.
 var controller = Botkit.anywhere(bot_options);
@@ -47,11 +47,11 @@ var webserver = require(__dirname + '/components/express_webserver.js')(controll
 
 
 // Load in a plugin that defines the bot's identity
-require(__dirname + '/components/plugin_identity.js')(controller);
+// require(__dirname + '/components/plugin_identity.js')(controller);
 
 // enable advanced botkit studio metrics
 // and capture the metrics API to use with the identity plugin!
-controller.metrics = require('botkit-studio-metrics')(controller);
+// controller.metrics = require('botkit-studio-metrics')(controller);
 
 // Open the web socket server
 controller.openSocketServer(controller.httpserver);

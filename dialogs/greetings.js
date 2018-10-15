@@ -1,7 +1,10 @@
+const utils = require('../components/utils');
 
 module.exports = function (controller) {
   
     controller.on('greetings', function (bot, message) {
+        // console.log("\n==================================================\n");
+        // console.log(message);
         bot.createConversation(message, function (err, convo) {
             convo.say({text: 'É a primeira vez que te vejo por aqui.'});
             convo.say({text: 'Deixa eu me apresentar... pode me chamar de Kuala, o coala do Kuau!'});
@@ -17,12 +20,12 @@ module.exports = function (controller) {
                 }
             ];
 
-            let message = {
+            let content = {
                 text: 'Você curte coalas?',
                 quick_replies: quickReplies
             };
 
-            convo.addQuestion(message, [
+            convo.addQuestion(content, [
                 {
                     pattern:'sim',
                     default: true,

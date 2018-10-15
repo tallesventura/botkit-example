@@ -1,5 +1,7 @@
 module.exports = function (controller) {
     controller.on('not-koala', function (bot, message) {
+        // console.log("\n==================================================\n");
+        // console.log(message);
         bot.createConversation(message, function (err, convo) {
             convo.say('Aeeeeeeee!');
             convo.say({
@@ -10,6 +12,22 @@ module.exports = function (controller) {
                         image: true
                     }
                 ]
+            });
+
+            let quickReplies = [
+                {
+                    title: 'Ok',
+                    payload: 'ok'
+                }
+            ];
+
+            let content = {
+                text: 'Me dá uma chance? Tenho certeza que seremos grandes amigos',
+                quick_replies: quickReplies
+            };
+
+            convo.addQuestion(content, function (response, convo) {
+                controller.trigger('koala', [bot, message]);
             });
 
             convo.activate();

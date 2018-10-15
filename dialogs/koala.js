@@ -1,5 +1,7 @@
 module.exports = function (controller) {
     controller.on('koala', function (bot, message) {
+        // console.log("\n==================================================\n");
+        // console.log(message);
         bot.createConversation(message, function (err, convo) {
             convo.say('Aeeeeeeee!');
             convo.say({

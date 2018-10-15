@@ -114,7 +114,7 @@
 
       },
       connect: function(user) {
-
+        console.log(user);
         var that = this;
 
         if (user && user.id) {
@@ -205,6 +205,7 @@
           var message = null;
           try {
             message = JSON.parse(event.data);
+            console.log(message);
           } catch (err) {
             that.trigger('socket_error', err);
             return;
@@ -479,5 +480,7 @@
     (function() {
       // your page initialization code here
       // the DOM will be available here
-      Botkit.boot();
+        var user = {id: 1, name:'Talles'};
+      Botkit.boot(user);
+      // Botkit.identifyUser(user);
     })();
