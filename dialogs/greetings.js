@@ -3,11 +3,16 @@ const utils = require('../components/utils');
 module.exports = function (controller) {
   
     controller.on('greetings', function (bot, message) {
-        // console.log("\n==================================================\n");
-        // console.log(message);
+         // console.log("\n==================================================\n");
+         // console.log(message);
         bot.createConversation(message, function (err, convo) {
-            convo.say({text: 'É a primeira vez que te vejo por aqui.'});
-            convo.say({text: 'Deixa eu me apresentar... pode me chamar de Kuala, o coala do Kuau!'});
+            console.log(message);
+            let userName = message.user_profile.name;
+            let greetings = utils.getGreetings();
+            let text = 'Ei ' + userName + ', ' + greetings + ' blz?';
+            convo.say({text: text});
+
+            convo.say({text: 'Meu nome é Kuala, o coala do Kuau... rá!'});
 
             let quickReplies = [
                 {
@@ -15,7 +20,7 @@ module.exports = function (controller) {
                     payload: 'sim'
                 },
                 {
-                    title: 'Não',
+                    title: 'Na verdade não...',
                     payload: 'nao'
                 }
             ];

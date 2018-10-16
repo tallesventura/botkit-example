@@ -1,10 +1,10 @@
+const time = require('time');
 
-exports.buildMessage = function (msg, text, type, ) {
-    var normalizedMsg = {
-        user: msg.user,
-        channel: msg.channel,
-        user_profile: msg.user_profile || null,
-        text: text,
-        type: type
-    }
+
+exports.getGreetings = function () {
+    let date = new time.Date();
+    date.setTimezone('America/Sao_Paulo');
+    date = date.getHours();
+
+    return date < 12 ? 'Bom dia!' : date < 18 ? 'Boa tarde!' : 'Boa noite!';
 };

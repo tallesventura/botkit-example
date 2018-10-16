@@ -81,6 +81,7 @@
         return false;
       },
       deliverMessage: function(message) {
+        console.log(message);
         if (this.options.use_sockets) {
           this.socket.send(JSON.stringify(message));
         } else {
@@ -114,7 +115,6 @@
 
       },
       connect: function(user) {
-        console.log(user);
         var that = this;
 
         if (user && user.id) {
@@ -205,7 +205,6 @@
           var message = null;
           try {
             message = JSON.parse(event.data);
-            console.log(message);
           } catch (err) {
             that.trigger('socket_error', err);
             return;

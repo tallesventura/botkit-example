@@ -26,32 +26,14 @@ const path = require("path");
 var bot_options = {
     debug: false,
     replyWithTyping: true,
-    typingDelayFactor: 0.1
+    typingDelayFactor: 0.3
 };
-
-// Use a mongo database if specified, otherwise store in a JSON file local to the app.
-// Mongo is automatically configured when deploying to Heroku
-// if (process.env.MONGO_URI) {
-//   // create a custom db access method
-//   var db = require(__dirname + '/components/database.js')({});
-//   bot_options.storage = db;
-// } else {
-//     bot_options.json_file_store = __dirname + '/.data/db/'; // store user data in a simple JSON format
-// }
 
 // Create the Botkit controller, which controls all instances of the bot.
 var controller = Botkit.anywhere(bot_options);
 
 // Set up an Express-powered webserver to expose oauth and webhook endpoints
 var webserver = require(__dirname + '/components/express_webserver.js')(controller);
-
-
-// Load in a plugin that defines the bot's identity
-// require(__dirname + '/components/plugin_identity.js')(controller);
-
-// enable advanced botkit studio metrics
-// and capture the metrics API to use with the identity plugin!
-// controller.metrics = require('botkit-studio-metrics')(controller);
 
 // Open the web socket server
 controller.openSocketServer(controller.httpserver);
@@ -73,11 +55,3 @@ fs.readdirSync(normalizedSkillsPath).forEach(function(file) {
 console.log('I AM ONLINE! COME TALK TO ME: http://localhost:' + (process.env.PORT || 3000))
 
 
-function usage_tip() {
-    console.log('~~~~~~~~~~');
-    console.log('Botkit Starter Kit');
-    console.log('Execute your bot application like this:');
-    console.log('PORT=3000 studio_token=<MY BOTKIT STUDIO TOKEN> node bot.js');
-    console.log('Get a Botkit Studio token here: https://studio.botkit.ai/')
-    console.log('~~~~~~~~~~');
-}

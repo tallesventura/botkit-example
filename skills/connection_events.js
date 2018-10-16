@@ -12,4 +12,8 @@ module.exports = function(controller) {
         controller.trigger('greetings', [bot, message]);
     });
 
+
+    controller.on('connection', function (bot, event) {
+        controller.trigger('greetings', [bot, event]);
+    });
 };

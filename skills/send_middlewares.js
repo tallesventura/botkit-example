@@ -4,5 +4,9 @@ module.exports = function (controller) {
         message.disable_input = true;
         next();
     });
-};
 
+    controller.middleware.receive.use(function (bot, message, next) {
+        //console.log(message);
+        next();
+    });
+};
